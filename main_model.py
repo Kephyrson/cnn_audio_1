@@ -7,7 +7,7 @@ from torch.nn.utils.rnn import pad_sequence
 import numpy as np
 import torchaudio
 from torchaudio.transforms import TimeMasking, FrequencyMasking
-
+import os
 class AudioAugmentor:
     def __init__(self, sr=22050):
         self.sr = sr
@@ -128,35 +128,34 @@ class AudioDataset(Dataset):
         return tensor_mel, tensor_label
 
 
-if __name__ == '__main__':
  
-    train_dataset = AudioDataset(
-        csv_path="../sorted_labels.csv",
-        audio_dir="../new/Dataset1/train_audio",
-        duration=15
-    )
+train_dataset = AudioDataset(
+    csv_path="./git_home/sorted_labels_train.csv",
+    audio_dir="./git_home/Dataset_audio/train_audio",        
+    duration=15
+)
     
-    train_dataloader = DataLoader(
-        train_dataset,
+train_dataloader = DataLoader(
+    train_dataset,
         
-        batch_size=4,
-        shuffle=True,
-        num_workers=0
-    )
+    batch_size=4,
+    shuffle=True,
+    num_workers=0
+)
     
-    test_dataset = AudioDataset(
-        csv_path="../sorted_labels0.csv",
-        audio_dir="../new/Dataset1/val_audio",
-        duration=15
-    )
+test_dataset = AudioDataset(
+    csv_path="./git_home/sorted_labels_val.csv",
+    audio_dir="./git_home/dataset_audio/val_audio",
+    duration=15
+)
     
-    test_dataloader = DataLoader(
-        test_dataset,
+test_dataloader = DataLoader(
+    test_dataset,
         
-        batch_size=4,
-        shuffle=True,
-        num_workers=0
-    )
+    batch_size=4,
+    shuffle=True,
+    num_workers=0
+)
 
 n_mels = 128  
 time_steps = (22050*15)//512 +1  
