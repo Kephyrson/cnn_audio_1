@@ -71,8 +71,7 @@ class AudioAugmentor:
         lam = np.random.beta(self.config['mixup_alpha'], self.config['mixup_alpha'])
         return lam * audio + (1 - lam) * shifted
 
-if __name__ == "__main__":
-    augmentor = AudioAugmentor(sr=16000)
+augmentor = AudioAugmentor(sr=16000)
     
 class AudioDataset(Dataset):
     def __init__(self, csv_path, audio_dir, sr=22050, n_mels=128, duration=15):
@@ -130,8 +129,8 @@ class AudioDataset(Dataset):
 
  
 train_dataset = AudioDataset(
-    csv_path="./git_home/sorted_labels_train.csv",
-    audio_dir="./git_home/Dataset_audio/train_audio",        
+    csv_path="./sorted_labels_train.csv",
+    audio_dir="./Dataset_audio/train_audio",        
     duration=15
 )
     
@@ -144,8 +143,8 @@ train_dataloader = DataLoader(
 )
     
 test_dataset = AudioDataset(
-    csv_path="./git_home/sorted_labels_val.csv",
-    audio_dir="./git_home/dataset_audio/val_audio",
+    csv_path="./sorted_labels_val.csv",
+    audio_dir="./dataset_audio/val_audio",
     duration=15
 )
     
